@@ -10,14 +10,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+
 class Director < ApplicationRecord
   validates(:name, presence: true)
-
-  def filmography
-    key = self.id
-
-    the_many = Movie.where({ :director_id => key })
-
-    return the_many
-  end
+  has_many(:filmography, :class_name => "Movie", :foreign_key => "director_id")
 end
